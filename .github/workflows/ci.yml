@@ -1,0 +1,46 @@
+# CI: lint, typecheck, and test on every push and pull request.
+#
+# Two suites, both gated. The logic suite (jest.logic.config.js) runs in plain
+# Node and covers the pure rules. The component suite (jest.config.js, jest-expo)
+# mounts every screen.
+#
+# The component suite used to be "run locally / on demand", which in practice
+# meant it was not run: a screen that crashes on an unhandled field is exactly
+# the failure neither the logic tests nor a typecheck can see, and it reaches a
+# driver mid-shift or a customer mid-order as a blank view. It is a little
+# slower; it is the suite that catches the bug that costs an order.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test (logic)
+        run: npm test
+
+      - name: Test (screens)
+        run: npm run test:components
