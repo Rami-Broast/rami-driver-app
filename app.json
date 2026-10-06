@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Rami Broast Driver",
+    "slug": "rami-driver",
+    "scheme": "ramidriver",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "platforms": ["ios", "android", "web"],
+    "web": {
+      "bundler": "metro",
+      "favicon": "./assets/favicon.png"
+    },
+    "icon": "./assets/icon.png",
+    "assetBundlePatterns": ["**/*"],
+    "splash": { "image": "./assets/splash.png", "resizeMode": "contain", "backgroundColor": "#752E2A" },
+    "ios": { "supportsTablet": false, "bundleIdentifier": "com.ramibroast.driver", "buildNumber": "1" },
+    "android": {
+      "package": "com.ramibroast.driver",
+      "versionCode": 1,
+      "adaptiveIcon": { "foregroundImage": "./assets/adaptive-icon.png", "backgroundColor": "#752E2A" },
+      "config": { "googleMaps": { "apiKey": "" } }
+    },
+    "plugins": [
+      ["expo-location", { "locationWhenInUsePermission": "Allow Rami Broast Driver to use your location for navigation and delivery tracking." }],
+      ["expo-image-picker", { "cameraPermission": "Allow Rami Broast Driver to take a photo as proof of delivery.", "photosPermission": "Allow Rami Broast Driver to attach a photo as proof of delivery." }]
+    ],
+    "extra": {
+      "apiBaseUrl": "https://rami-api.example.com/api/v1",
+      "googleMapsApiKey": ""
+    }
+  }
+}
