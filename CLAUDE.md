@@ -250,7 +250,7 @@ API's `CORS_ALLOWED_ORIGINS` comes from the `CLIENT_ORIGINS` repo variable, and
 an origin that is not in it has every request rejected before it reaches a
 route. This app's origin *was* left out — the list deployed on 2026-09-06 named
 the admin, POS and customer origins and localhost but not
-`https://driver-app-orpin.vercel.app`, so no driver could sign in on the web
+the driver app's own web origin, so no driver could sign in on the web
 build and the banner above is exactly what they saw.
 
 All four origins are now written out in full in
